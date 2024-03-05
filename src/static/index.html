@@ -1,21 +1,41 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0" />
-    <link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous" />
-    <link rel="stylesheet" href="css/font-awesome/all.min.css" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <title>Todo App</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microbialite Front-End Test</title>
 </head>
 <body>
-    <div id="root"></div>
-    <script src="js/react.production.min.js"></script>
-    <script src="js/react-dom.production.min.js"></script>
-    <script src="js/react-bootstrap.js"></script>
-    <script src="js/babel.min.js"></script>
-    <script type="text/babel" src="js/app.js"></script>
+    <h1>Hello microbialite lovers</h1>
+    <form>
+        <button id="get">GET</button>
+        <pre id="output"></pre> <!-- Use a pre element to preserve formatting -->
+    </form>
+    <script>
+        const getBtn = document.getElementById('get');
+        const output = document.getElementById('output');
+
+        const baseUrl = "http://localhost:8080/api/clasticGrains"; // Corrected endpoint URL
+
+        getBtn.addEventListener('click', getInfo);
+
+        async function getInfo(e) {
+            e.preventDefault();
+            try {
+                const res = await fetch(baseUrl, { method: 'GET' });
+                if (!res.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await res.text(); // Get the response as text
+                console.log(data); // Log the data to verify it's correctly received
+                output.textContent = data; // Set the text content of the pre element
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+        }
+    </script>
 </body>
 </html>
+
+

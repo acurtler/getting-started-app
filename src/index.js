@@ -1,10 +1,23 @@
 const express = require('express');
+const path = require('path');
+const pool = require('./database');
+
 const app = express();
-const db = require('./persistence');
-const getItems = require('./routes/getItems');
-const addItem = require('./routes/addItem');
-const updateItem = require('./routes/updateItem');
-const deleteItem = require('./routes/deleteItem');
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/api/clasticGrains', (req, res) => {
+    pool.query('SELECT * FROM ClasticGrains', (err, result, fields) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Internal Server Error' }); // Send error response
+        }
+        console.log(result);
+        res.json(result); // Send data back to the client as JSON
+    });
+});
 
 app.use(express.json());
 app.use(express.static(__dirname + '/static'));
