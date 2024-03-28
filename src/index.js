@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 /*const pool = require('../database');*/
 
 const { 
@@ -32,6 +33,8 @@ pool.query('select * from ClasticGrains', (err, result, fields)=>{
 module.exports = pool;
 
 const app = express();
+
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
