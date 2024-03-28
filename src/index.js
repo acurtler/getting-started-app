@@ -6,13 +6,22 @@ const {
     createPool
 } = require('mysql2');
 
+// Create a pool using environment variables
 const pool = createPool({
+    database: process.env.DB_DATABASE,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT // If applicable
+});
+
+/*const pool = createPool({
     database:"h762lahe056bge13",
     user: 'izgrmlgwk70csp9l',
     password: 'qpmikh9t3n3a2ekg',
     host: 'nnsgluut5mye50or.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 })
-
+*/
 pool.query('select * from ClasticGrains', (err, result, fields)=>{
     if(err){
         return console.log(err);
