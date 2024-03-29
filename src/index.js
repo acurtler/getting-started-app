@@ -18,6 +18,9 @@ const pool = createPool({
     host: process.env.DB_HOST
 });
 
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'static')));
+
 // Route to fetch clasticGrains data from the database
 app.get('/api/clasticGrains', (req, res) => {
     pool.query('SELECT * FROM ClasticGrains', (err, result, fields) => {
@@ -29,8 +32,6 @@ app.get('/api/clasticGrains', (req, res) => {
     });
 });
 
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'src/static')));
 
 // Start the server
 app.listen(port, () => {
