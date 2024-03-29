@@ -9,13 +9,21 @@
 </head>
 <body>
     <h1>Hello microbialite lovers</h1>
-    <form>
-        <button id="get">Get clastic grains</button>
-        <pre id="output"></pre> <!-- Use a pre element to preserve formatting -->
-    </form>
+    <button id="get">Get clastic grains</button>
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody id="output">
+
+        </tbody>
+        </table>
     <script>
         const getBtn = document.getElementById('get');
-        const output = document.getElementById('output');
 
         const baseUrl = window.location.origin + '/api/clasticGrains'; // Corrected endpoint URL
         //console.log('baseUrl: ' + baseUrl);
@@ -35,6 +43,24 @@
             } catch (error) {
                 console.error('There was a problem with the fetch operation:', error);
             }
+        }
+
+        // Function to populate the table with data
+        function populateTable(data) {
+            const output = document.getElementById('output');
+            output.innerHTML = ''; // Clear previous content
+
+            // Loop through the data and create table rows
+            data.forEach(rowData => {
+                const row = document.createElement('tr');
+                // Add cells for each column in the row
+                for (const key in rowData) {
+                    const cell = document.createElement('td');
+                    cell.textContent = rowData[key];
+                    row.appendChild(cell);
+                }
+                output.appendChild(row);
+            });
         }
     </script>
 </body>
