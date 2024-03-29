@@ -86,6 +86,16 @@ app.listen(PORT, () => {
 module.exports = pool;
 */
 
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Middleware to set the correct MIME type for CSS files
+app.use((req, res, next) => {
+  if (req.url.endsWith('.css')) {
+    res.setHeader('Content-Type', 'text/css');
+  }
+  next();
+});
+
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
