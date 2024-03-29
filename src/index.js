@@ -86,7 +86,7 @@ app.listen(PORT, () => {
 module.exports = pool;
 */
 
-app.use(express.static(path.join(__dirname, 'css')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 // Middleware to set the correct MIME type for CSS files
 app.use((req, res, next) => {
