@@ -46,8 +46,5 @@ app.listen(port, () => {
     host: 'nnsgluut5mye50or.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 })
 */
-// index.js
-
-
 
 
