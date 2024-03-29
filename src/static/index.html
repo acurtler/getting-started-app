@@ -22,47 +22,7 @@
 
         </tbody>
         </table>
-    <script>
-        const getBtn = document.getElementById('get');
-
-        const baseUrl = window.location.origin + '/api/clasticGrains'; // Corrected endpoint URL
-        //console.log('baseUrl: ' + baseUrl);
-
-        getBtn.addEventListener('click', getInfo);
-
-        async function getInfo(e) {
-            e.preventDefault();
-            try {
-                const res = await fetch(baseUrl, { method: 'GET' });
-                if (!res.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await res.text(); // Get the response as text
-                console.log(data); // Log the data to verify it's correctly received
-                output.textContent = data; // Set the text content of the pre element
-            } catch (error) {
-                console.error('There was a problem with the fetch operation:', error);
-            }
-        }
-
-        // Function to populate the table with data
-        function populateTable(data) {
-            const output = document.getElementById('output');
-            output.innerHTML = ''; // Clear previous content
-
-            // Loop through the data and create table rows
-            data.forEach(rowData => {
-                const row = document.createElement('tr');
-                // Add cells for each column in the row
-                for (const key in rowData) {
-                    const cell = document.createElement('td');
-                    cell.textContent = rowData[key];
-                    row.appendChild(cell);
-                }
-                output.appendChild(row);
-            });
-        }
-    </script>
+    <script src="../index.js"></script>
 </body>
 </html>
 
