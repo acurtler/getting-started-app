@@ -48,7 +48,7 @@ app.listen(port, () => {
 */
 // index.js
 
-document.addEventListener('DOMContentLoaded', () => {
+
     const getBtn = document.getElementById('get');
     const dataTable = document.getElementById('dataTable'); // Reference to the table
 
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show the table after populating data
         dataTable.style.display = 'table';
     }
-});
+
 
 
 
