@@ -7,14 +7,45 @@ const {
     createPool
 } = require('mysql2');
 
-// Create a pool using environment variables
-const pool = createPool({
+
+// Function to create a database connection pool with retry logic
+function createDatabasePoolWithRetry(options, maxRetries, retryDelay) {
+    let retries = 0;
+
+    // Function to create the database pool with retry
+    function createPoolWithRetry() {
+        const pool = createPool(options);
+
+        // Handle connection errors
+        pool.on('error', (err) => {
+            console.error('Database connection error:', err);
+            if (retries < maxRetries) {
+                retries++;
+                console.log(`Retrying database connection (attempt ${retries}/${maxRetries})...`);
+                setTimeout(createPoolWithRetry, retryDelay);
+            } else {
+                console.error('Max retry attempts reached. Unable to establish database connection.');
+            }
+        });
+        // Return the database pool
+        return pool;
+    }
+    // Start the initial connection attempt
+    return createPoolWithRetry();
+}
+
+const dbOptions = {
     database: process.env.DB_DATABASE,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT // If applicable
-});
+};
+
+// Create a database connection pool with retry logic
+const maxRetries = 3; // Maximum number of retry attempts
+const retryDelay = 5000; // Retry delay in milliseconds (e.g., 5 seconds)
+const pool = createDatabasePoolWithRetry(dbOptions, maxRetries, retryDelay);
 
 /*const pool = createPool({
     database:"h762lahe056bge13",
