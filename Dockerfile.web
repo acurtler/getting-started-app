@@ -4,7 +4,7 @@ FROM node:18-alpine
 WORKDIR /app
 COPY . .
 RUN yarn install --production
-CMD ["node", "src/index.js"]
+CMD ["node", "src/static/js/index.js"]
 EXPOSE 3000
 
 COPY ./ports.conf /etc/ports.conf
