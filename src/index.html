@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Microbialite Front-End Test</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <h1>Hello microbialite lovers</h1>
     <form>
-        <button id="get">GET</button>
+        <button id="get">Get clastic grains</button>
         <pre id="output"></pre> <!-- Use a pre element to preserve formatting -->
     </form>
     <script>
@@ -17,6 +18,7 @@
         const output = document.getElementById('output');
 
         const baseUrl = window.location.origin + '/api/clasticGrains'; // Corrected endpoint URL
+        //console.log('baseUrl: ' + baseUrl);
 
         getBtn.addEventListener('click', getInfo);
 
