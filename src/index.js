@@ -1,7 +1,38 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-/*const pool = require('../database');*/
+
+const http = require('http');
+const url = require('url');
+
+// Create a simple HTTP server
+const server = http.createServer((req, res) => {
+    // Parse the request URL
+    const parsedUrl = url.parse(req.url, true);
+
+    // Check if the request is for the '/api/clasticGrains' endpoint
+    if (parsedUrl.pathname === '/api/clasticGrains') {
+        // Set CORS headers
+        res.setHeader('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
+        res.setHeader('Access-Control-Allow-Methods', 'GET'); // Allow only GET requests
+        res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
+        // Send the response
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'This is the response from /api/clasticGrains' }));
+    } else {
+        // Handle other requests
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('Not found');
+    }
+});
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+
 
 const { 
     createPool
@@ -50,30 +81,3 @@ app.get('/api/clasticGrains', (req, res) => {
         res.json(result); // Send data back to the client as JSON
     });
 });
-
-/*
-app.use(express.json());
-app.use(express.static(__dirname + '/static'));
-
-app.get('/items', getItems);
-app.post('/items', addItem);
-app.put('/items/:id', updateItem);
-app.delete('/items/:id', deleteItem);
-*/
-const port = process.env.PORT || 3000;
-
-app.listen(port, () => {
-    console.log('Server is listening on port ${port}');
-});
-
-/*
-const gracefulShutdown = () => {
-    db.teardown()
-        .catch(() => {})
-        .then(() => process.exit());
-};
-
-process.on('SIGINT', gracefulShutdown);
-process.on('SIGTERM', gracefulShutdown);
-process.on('SIGUSR2', gracefulShutdown); // Sent by nodemon
-*/
