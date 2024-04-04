@@ -1,8 +1,9 @@
 body {
     background-color: #f4f4f4;
-    margin-top: 50px;
+    margin: 0;
+    padding: 0;
     font-family: 'Lato';
-    color: blue;
+    color: black;
 }
 
 .item {
@@ -37,4 +38,58 @@ body {
 
 button:focus {
     border: 1px solid #333;
+}
+
+header {
+    background-color: #703081;
+    color: #ffffff;
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fixed-navbar {
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ padding: 10px;
+ display: flex;
+ justify-content: flex-start;
+}
+
+.logo {
+    margin-right: 50px;
+}
+
+.fixed-navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.fixed-navbar ul li {
+    margin-left: 25px;
+    font-size: x-large;
+}
+
+.fixed-navbar ul li:hover{
+    box-shadow: 0 0 1em #aaa;
+}
+
+.fixed-navbar ul li:first-child {
+    margin-left: 500px;
+}
+
+.fixed-navbar ul li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+main{
+    margin-top: 60px;
 }
