@@ -19,8 +19,10 @@
             </nav>
     </header>
     <button id="get">Get clastic grains</button>
+    <p id=""output></p>
     <script>
     const getBtn = document.getElementById('get');
+    const output = document.getElementById('output');
 
     const baseUrl = window.location.origin + '/api/clasticGrains'; // Corrected endpoint URL
     //console.log('baseUrl: ' + baseUrl)
@@ -41,23 +43,6 @@
         }
     }
     
-    // Function to populate the table with data
-    function populateTable(data) {
-        const output = document.getElementById('output');
-        output.innerHTML = ''; // Clear previous content
-
-        // Loop through the data and create table rows
-        data.forEach(rowData => {
-            const row = document.createElement('tr');
-            // Add cells for each column in the row
-            for (const key in rowData) {
-                const cell = document.createElement('td');
-                cell.textContent = rowData[key];
-                row.appendChild(cell);
-            }
-            output.appendChild(row);
-        });
-    }
 </script>
 </body>
 </html>
