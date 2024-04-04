@@ -35,7 +35,7 @@
             if (!res.ok) {
                 throw new Error('Network response was not ok');
             }
-            const data = await res.text(); // Get the response as text
+            const data = await res.json(); // Get the response as text  
             console.log(data); // Log the data to verify it's correctly received
             output.textContent = data; // Set the text content of the pre element
         } catch (error) {
